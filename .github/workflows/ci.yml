@@ -1,0 +1,32 @@
+name: Test and Run program
+
+on:
+  - push
+
+jobs:
+  test-program:
+    name: Test Program
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install pytest
+      run: pip install pytest
+    - name: Run test cases
+      run: pytest tests
+  run-program:
+    needs: [test-program]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Run program
+      run: python app.py
