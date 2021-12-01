@@ -2,6 +2,9 @@ def fizzbuzz(number):
     if type(number) != int:
         return number
 
+    if str(number).find('7') >= 0:
+        return 'github'
+    
     a = number % 3
     b = number % 5
     if a == 0 and b == 0:
